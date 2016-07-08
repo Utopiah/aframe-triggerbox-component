@@ -1,6 +1,6 @@
-      if (typeof AFRAME === 'undefined') {
-        throw new Error('Component attempted to register before AFRAME was available.');
-      }
+if (typeof AFRAME === 'undefined') {
+	throw new Error('Component attempted to register before AFRAME was available.');
+}
 /**
  * Trigger box, emit an event on the moving entity once it enters and leaves a predefined area
  *
@@ -45,10 +45,12 @@ AFRAME.registerComponent('triggerbox', {
       }
   },
   init: function() {
+      // we don't know yet where we are
       this.lastestateset = false;
       this.laststateinthetriggerbox = false;
   },
   tick: function() {
+      // gathering all the data
       var data = this.data;
       var thiswidth = data.width;
       var thisheight = data.height;
@@ -56,39 +58,41 @@ AFRAME.registerComponent('triggerbox', {
       var x0 = data.x0;
       var y0 = data.y0;
       var z0 = data.z0;
+      var triggereventname = data.triggereventname;
       var lastestateset = this.lastestateset;
       var laststateinthetriggerbox = this.laststateinthetriggerbox;
-      var triggereventname = data.triggereventname;
+
+      //done here assuming the box size and position can change since init
       minX = thiswidth / 2 + x0;
       maxX = ( -1 * thiswidth / 2 ) + x0;
-
       minY = thisheight / 2 + y0;
       maxY = ( -1 * thisheight / 2 ) + y0;
-
       minZ = thisdepth / 2 + z0;
       maxZ = ( -1 * thisdepth / 2 ) + z0;
 
       var position = this.el.getComputedAttribute('position');
-
       if (( minX > position.x) && (maxX < position.x) 
           && ( minY > position.y) && ( maxY < position.y)
           && ( minZ > position.z) && ( maxZ < position.z)){
+	// we are in
         if (lastestateset){
+	  // we were not before
           if (!laststateinthetriggerbox) {
             var event = new Event(triggereventname+'_entered'); this.el.dispatchEvent(event);
           }
         }
         this.laststateinthetriggerbox = true;
-        this.lastestateset = true;
       } else {
+	// we are out
         if (lastestateset){
           if (laststateinthetriggerbox) {
+	  // we were not before
             var event = new Event(triggereventname+'_exited'); this.el.dispatchEvent(event);
           }
         }
         this.laststateinthetriggerbox = false;
-        this.lastestateset = true;
       }
+      this.lastestateset = true;
   },
 
 });
