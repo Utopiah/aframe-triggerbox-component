@@ -32,6 +32,13 @@
       <a-event name="spheretest_exited" color="red"></a-event>
       <a-animation attribute="position" from="-2 0 0" to="2 0 0" dur="10000" repeat="indefinite" direction="alternate"></a-animation>
     </a-sphere>
+
+    <a-sphere scale="0.5 0.5 0.5" color="blue" id="movingsphereruntime" triggerbox="x0:-2; y0: 4; triggereventname: spheretestruntime;">
+      <a-event name="spheretestruntime_entered" color="yellow"></a-event>
+      <a-event name="spheretestruntime_exited" color="orange"></a-event>
+      <a-animation attribute="position" from="-2 4 0" to="2 4 0" dur="10000" repeat="indefinite" direction="alternate"></a-animation>
+    </a-sphere>
+
     <a-entity id="movingaction" text="text: " position="-7 4 -5" material="color: orange" scale="2"></a-entity>
       
       <a-box position="-2 0 0" material="transparent: true; opacity: 0.1; color:green;"></a-box>
@@ -78,6 +85,10 @@
             action.setAttribute('text', 'text: sphere left the mini trigger box');
             action.setAttribute('material', 'color: red');
         });
+
+	// note that it's possible to change values at run time
+	var movingsphere = document.getElementById('movingruntimesphere');
+	movingsphere.setAttribute("triggerbox",{x0: -2, y0: -2, z0: -5, triggereventname: "spheretestruntime"});
       }
       
     </script>
