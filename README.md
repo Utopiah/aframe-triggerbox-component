@@ -5,3 +5,6 @@ Usage camera triggerbox="triggereventname: mytriggerbox" will make a 1x1x1 box w
 Demo http://output.jsbin.com/gogoci
 
 inspired by https://github.com/atomicguy/aframe-fence-component/
+
+Todo :
+1. check that https://aframe.io/docs/master/core/component.html#multiple-instancing does work as expected

@@ -14,6 +14,7 @@ if (typeof AFRAME === 'undefined') {
  *
  */
 AFRAME.registerComponent('triggerbox', {
+  multiple: true,
   schema: {
       width: {
           type: 'number',
