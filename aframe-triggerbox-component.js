@@ -71,7 +71,7 @@ AFRAME.registerComponent('triggerbox', {
       minZ = thisdepth / 2 + z0;
       maxZ = ( -1 * thisdepth / 2 ) + z0;
 
-      var position = this.el.getComputedAttribute('position');
+      var position = this.el.getAttribute('position');
       if (( minX > position.x) && (maxX < position.x) 
           && ( minY > position.y) && ( maxY < position.y)
           && ( minZ > position.z) && ( maxZ < position.z)){
